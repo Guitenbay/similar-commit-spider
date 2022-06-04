@@ -1,0 +1,12 @@
+{
+  "name": "repository-issues",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "test": "node ./src/main.js redis jedis"
+  },
+  "dependencies": {
+    "@octokit/core": "^3.6.0"
+  }
+}

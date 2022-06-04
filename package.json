@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "test": "node ./src/main.js redis jedis"
+    "start": "node ./src/main.js",
+    "test": "node ./src/main.js alibaba Alink"
   },
   "dependencies": {
     "@octokit/core": "^3.6.0"

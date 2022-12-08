@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./src/main.js",
-    "test": "node ./src/main.js alibaba Alink"
+    "test": "node ./src/main.js alibaba Alink",
+    "commit": "node ./src/commit/commit.js"
   },
   "dependencies": {
     "@octokit/core": "^3.6.0"

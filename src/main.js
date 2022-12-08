@@ -10,11 +10,12 @@ const octokit = new Octokit({
 
 async function getIssueList(owner, repo, page) {
   const issues = await octokit.request(
-    "GET /repos/{owner}/{repo}/issues?state=closed&per_page=100&page={page}",
+    "GET /repos/{owner}/{repo}/issues?state=closed&per_page=100&page={page}&labels={labels}",
     {
       owner,
       repo,
       page,
+      labels: "",
     }
   );
 
@@ -29,8 +30,14 @@ async function getIssueList(owner, repo, page) {
       `GET /${owner}/${repo}/issues page=${page}\t...\t${issues.data.length}`
     );
     const curr = issues.data.map(
-      ({ number, created_at, updated_at, closed_at }) => ({
+      ({ number, created_at, updated_at, closed_at, labels }) => ({
         issue: `#${number}`,
+        labels: labels.map(({ url, name, default: d, description }) => ({
+          name,
+          url,
+          default: d,
+          description,
+        })),
         created_at,
         updated_at,
         closed_at,
@@ -85,7 +92,9 @@ if (args.length < 2) {
 }
 
 async function main() {
+  let i = 0
   for ([owner, repo] of repoList) {
+    console.log(`${++i} / ${repoList.length} :----`);
     const issues = await getIssueList(owner, repo, 1);
     fs.writeFileSync(
       `./out/issue_${owner}_${repo}.json`,

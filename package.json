@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node ./src/main.js",
     "test": "node ./src/main.js alibaba Alink",
-    "commit": "node ./src/commit/commit.js"
+    "commit_info": "node ./src/commit/commit.js",
+    "commit": "node ./src/commit/run.js"
   },
   "dependencies": {
     "@octokit/core": "^3.6.0"

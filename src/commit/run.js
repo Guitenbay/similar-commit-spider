@@ -1,5 +1,5 @@
 const { getCommitInfo } = require("./commit");
-const { getCommitHashList, getCommitHashListFrom } = require("./list");
+const { getCommitHashListFrom } = require("./list");
 
 function calculateSimilar(filesA, filesB) {
   let result = 0;
@@ -95,10 +95,10 @@ async function findSimilarForCommitBlock(list, owner, repo) {
 }
 
 async function main() {
-  const [owner, repo] = ["apache", "skywalking"];
   let [_, __, ...arguments] = process.argv; // 参数数组
-  const start = +arguments[0]; // 获取arg1
-  const leng = +arguments[1]; // 获取arg2
+  const [owner, repo, startStr, lengStr] = arguments;
+  const start = +startStr; // 获取arg1
+  const leng = +lengStr; // 获取arg2
   // console.log(start, leng);
   // const ALLLENGTH = 100,
   //   BLOCK = leng ?? 10,

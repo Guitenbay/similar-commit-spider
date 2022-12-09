@@ -2,8 +2,8 @@
 
 usage="\nError: use args, such as start, stop and restart \n"
 
-start=0
-end=5
+start=100
+end=150
 step=5
 
 block=10
@@ -14,4 +14,5 @@ for ((i = start; i < end; i += step)); do
   echo "> [${time}] (${index}) START getting similar commit range (${i}, ${block})..."
   touch out-c/file_$i.txt && npm run commit $i $block > out-c/file_$i.txt 2>&1
 done
-echo '> DONE! <'
+time=$(date "+%Y-%m-%d %H:%M:%S")
+echo "> [${time}] DONE! <"

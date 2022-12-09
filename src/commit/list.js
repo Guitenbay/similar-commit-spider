@@ -44,7 +44,7 @@ async function getCommitHashListFrom(owner, repo, start, length) {
     limit = start + length;
     perpage = limit < 100 ? limit : 100;
     sliceStart = start % perpage;
-    startPage = start === 0 ? 1 : Math.ceil(start / perpage);
+    startPage = Math.floor(start / perpage) + 1;
     endPage = Math.ceil(limit / perpage);
   }
   // console.log(start, length, limit, perpage, sliceStart, startPage, endPage);

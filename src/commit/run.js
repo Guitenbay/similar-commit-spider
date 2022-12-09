@@ -1,5 +1,5 @@
 const { getCommitInfo } = require("./commit");
-const { getCommitHashList } = require("./list");
+const { getCommitHashList, getCommitHashListFrom } = require("./list");
 
 function calculateSimilar(filesA, filesB) {
   let result = 0;
@@ -8,11 +8,11 @@ function calculateSimilar(filesA, filesB) {
     for (let b of filesB) {
       if (a.filename === b.filename) {
         result++;
-        const paths = a.filename.split('/');
+        const paths = a.filename.split("/");
         files.push({
           filename: paths[paths.length - 1],
-          patchHeadA: a.patchHeads.join('|'),
-          patchHeadB: b.patchHeads.join('|'),
+          patchHeadA: a.patchHeads.join("|"),
+          patchHeadB: b.patchHeads.join("|"),
         });
       }
     }
@@ -21,10 +21,7 @@ function calculateSimilar(filesA, filesB) {
   return { value: divider === 0 ? 0 : result / divider, files };
 }
 
-async function main() {
-  const [owner, repo] = ["apache", "skywalking"];
-  const list = await getCommitHashList(owner, repo, 10);
-
+async function findSimilarForCommitBlock(list, owner, repo) {
   const commit_list = [];
   let i = 0,
     len = list.length;
@@ -47,7 +44,10 @@ async function main() {
             const res = /^@@\s\-\d+,\d+\s\+\d+,\d+\s@@/.test(line);
             // console.log(res, line);
             return res;
-          }).map((line) => line.replace(/^@@\s(\-\d+,\d+\s\+\d+,\d+)\s@@.*/, (_, p1) => p1));
+          })
+          .map((line) =>
+            line.replace(/^@@\s(\-\d+,\d+\s\+\d+,\d+)\s@@.*/, (_, p1) => p1)
+          );
         // console.log(heads);
         return { filename: file.filename, patchHeads: heads };
       })
@@ -90,8 +90,30 @@ async function main() {
       "background:#41b883 ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff",
       "background:transparent"
     );
-    console.table(similarFiles, ['filename', 'patchHeadA', 'patchHeadB']);
+    console.table(similarFiles, ["filename", "patchHeadA", "patchHeadB"]);
   });
+}
+
+async function main() {
+  const [owner, repo] = ["apache", "skywalking"];
+  let [_, __, ...arguments] = process.argv; // 参数数组
+  const start = +arguments[0]; // 获取arg1
+  const leng = +arguments[1]; // 获取arg2
+  // console.log(start, leng);
+  // const ALLLENGTH = 100,
+  //   BLOCK = leng ?? 10,
+  //   STEP = 5;
+  const list = await getCommitHashListFrom(owner, repo, start, leng);
+
+  // const block_list = [];
+  // // 按 10 个一组，每组间隔 5 的方式 卷积切分 list
+  // for (let i = 0; i < ALLLENGTH; i += STEP) {
+  //   block_list.push(list.slice(i, i + BLOCK));
+  // }
+
+  // for (let block of block_list) {
+  findSimilarForCommitBlock(list, owner, repo);
+  // }
 }
 
 main();

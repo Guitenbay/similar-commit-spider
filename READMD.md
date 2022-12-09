@@ -8,10 +8,18 @@
 
 在 `config.json` 里配置 `github-access-token`
 
-## 运行
+## 运行获取 ISSUE
 
     $ npm start
 
-## 结果
+### 结果
 
 结果在 out 目录下
+
+## 运行获取 相似 Commit
+
+    $ sh find-similar-commit.sh
+
+### 结果
+
+结果在 out-c 目录下

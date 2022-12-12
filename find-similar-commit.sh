@@ -2,10 +2,10 @@
 
 usage="\nError: use args, such as start, stop and restart \n"
 
-owner=apache
-repo=dubbo
-start=0
-end=100
+owner=redis
+repo=jedis
+start=400
+end=500
 step=5
 
 block=10
@@ -25,7 +25,7 @@ for ((i = start; i < end; i += step)); do
   time=$(date "+%Y-%m-%d %H:%M:%S")
   index=$(expr $i + 1)
   echo "> [${time}] (${index}) START getting similar commit range (${i}, ${block})..."
-  touch out-c/$owner/$repo/file_$i.txt && npm run commit $owner $repo $i $block > out-c/file_$i.txt 2>&1
+  touch out-c/$owner/$repo/file_$i.txt && npm run commit $owner $repo $i $block > out-c/$owner/$repo/file_$i.txt 2>&1
 done
 time=$(date "+%Y-%m-%d %H:%M:%S")
 echo "> [${time}] DONE! <"

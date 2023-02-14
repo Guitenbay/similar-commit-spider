@@ -77,7 +77,7 @@ if (args.length < 2) {
     "https://github.com/alibaba/canal",
     "https://github.com/alibaba/jvm-sandbox",
     "https://github.com/alibaba/jetcache",
-    // "https://github.com/alibaba/Alink",
+    "https://github.com/alibaba/Alink",
     "https://github.com/alibaba/Sentinel",
   ].map((url) =>
     url

@@ -2,10 +2,10 @@
 
 usage="\nError: use args, such as start, stop and restart \n"
 
-owner=redis
-repo=jedis
-start=400
-end=500
+owner=jmrozanec
+repo=cron-utils
+start=500
+end=600
 step=5
 
 block=10

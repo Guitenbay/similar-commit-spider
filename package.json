@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./src/main.js",
-    "test": "node ./src/main.js alibaba Alink",
+    "allcommit": "node ./src/get-commit.js",
+    "test": "node ./src/main.js alibaba fastjson",
+    "test_commit": "node ./src/get-commit.js Guitenbay similar-commit-spider",
     "commit_info": "node ./src/commit/commit.js",
     "commit": "node ./src/commit/run.js"
   },
